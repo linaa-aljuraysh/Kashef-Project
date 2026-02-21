@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kashef | AI Price Tracker</title>
+
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.7.1/firebase-firestore-compat.js"></script>
+</head>
+
+<body>
+
+<header>
+<nav class="navbar">
+<div class="nav-container">
+
+<div class="logo-container" onclick="showPage('home')">
+<img src="logo.jpg" class="main-logo zoom-logo">
+</div>
+
+<ul class="nav-links">
+<li><a href="#" onclick="showPage('home')">Home</a></li>
+<li><a href="#" onclick="showPage('about')">About Us</a></li>
+</ul>
+
+<div class="auth-buttons">
+<a href="#" class="user-icon" onclick="checkAuthStatus()">
+<i class="fa-regular fa-circle-user"></i>
+</a>
+</div>
+
+</div>
+</nav>
+</header>
+
+<main>
+
+<section id="home-page" class="page active">
+<div class="hero">
+<div class="hero-content">
+<h1 id="hero-title">Smart Price Tracking for Saudi Retailers</h1>
+<p>Track, Match, and Save on your favorite products</p>
+
+<div class="search-box">
+<input type="text" id="search-input" placeholder="Search product...">
+<button onclick="performSearch()"><i class="fa fa-search"></i> Search</button>
+</div>
+</div>
+</div>
+</section>
+
+<section id="results-page" class="page">
+<div class="container">
+<h2>Search Results</h2>
+<div id="product-list" class="results-grid"></div>
+</div>
+</section>
+
+<section id="about-page" class="page">
+  <div class="container">
+    <div class="about-header">
+      <h2>Meet Our Team</h2>
+      <p>Information Technology Students — Qassim University</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-card"><h4>Linaa Nasser Aljuraysh</h4><span class="role">Team Member</span></div>
+      <div class="team-card"><h4>Jana Saleh Althunayan</h4><span class="role">Team Member</span></div>
+      <div class="team-card"><h4>Taif Ahmed Almuzil</h4><span class="role">Team Member</span></div>
+      <div class="team-card"><h4>Lamis Suliman Aldukhayl</h4><span class="role">Team Member</span></div>
+    </div>
+    <div class="supervisor-info">
+      <p>Project supervised by: <strong>Dr. Ziad Al-Saeed</strong></p>
+    </div>
+  </div>
+</section>
+
+<section id="login-page" class="page">
+<div class="login-wrapper">
+<form class="login-card" onsubmit="handleLogin(event)">
+  <h2>Welcome Back</h2>
+  <div class="input-field">
+    <label>Email</label>
+    <input type="email" id="login-email" required>
+  </div>
+  <div class="input-field">
+    <label>Password</label>
+    <input type="password" id="login-pass" required>
+  </div>
+  <p style="text-align: right; margin-top: -10px;">
+    <a href="#" onclick="forgotPassword()" style="font-size: 0.8rem; color: #10b981; text-decoration: none; font-weight: bold;">Forgot Password?</a>
+  </p>
+  <button type="submit" class="auth-btn">Login</button>
+  <button type="button" class="back-btn" onclick="showPage('home')">← Back to Home</button>
+  <p class="switch-text">Don't have an account? <a href="#" onclick="showPage('signup')">Sign Up</a></p>
+</form>
+</div>
+</section>
+
+<section id="signup-page" class="page">
+<div class="login-wrapper">
+<form class="login-card" onsubmit="handleSignUp(event)">
+  <h2>Create Account</h2>
+  <div class="input-field">
+    <label>Full Name</label>
+    <input type="text" id="signup-name" required>
+  </div>
+  <div class="input-field">
+    <label>Email</label>
+    <input type="email" id="signup-email" required>
+  </div>
+  <div class="input-field">
+    <label>Password</label>
+    <input type="password" id="signup-pass" required>
+  </div>
+  <button type="submit" class="auth-btn">Create Account</button>
+  <button type="button" class="back-btn" onclick="showPage('home')">← Back to Home</button>
+  <p class="switch-text">Already have an account? <a href="#" onclick="showPage('login')">Login</a></p>
+</form>
+</div>
+</section>
+
+<section id="dashboard-page" class="page">
+<div class="container">
+<h2 id="welcome-text">Welcome!</h2>
+<h3>⭐ Your Watchlist</h3>
+<div id="watchlist"></div>
+<button onclick="logout()" class="auth-btn" style="max-width:200px; margin-top: 20px;">Logout</button>
+</div>
+</section>
+
+</main>
+
+<script src="script.js"></script>
+</body>
+</html>
